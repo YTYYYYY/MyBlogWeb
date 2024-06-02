@@ -135,6 +135,14 @@ public class FileService {
         return fileList;
     }
 
+    public void deleteCurrFile(Integer fileid, Integer currid) {
+        String writer = fileMapper.getWriterById(fileid);
+        String nickname = userMapper.getNicknameById(currid);
+        if(writer.equals(nickname)){
+            fileMapper.deleteById(fileid);
+        }
+    }
+
 
 //    private UploadFile getFileByMd5(String md5){
 //        //查询文件是否存在md5

@@ -85,9 +85,9 @@ public class FileController {
         return Result.success(files);
     }
 
-    @DeleteMapping("/{id}")
-    public Result deleteFile(@PathVariable Integer id){
-        fileService.deleteFile(id);
+    @DeleteMapping("/{fileid}")
+    public Result deleteFile(@PathVariable Integer fileid,@RequestParam Integer currid){
+        fileService.deleteCurrFile(fileid,currid);
         return Result.success();
     }
 

@@ -62,9 +62,6 @@
           <el-form-item label="联系方式 :" prop="phone">
             <el-input v-model="ruleForm.phone" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="地址 :" prop="address">
-            <el-input v-model="ruleForm.address" autocomplete="off"></el-input>
-          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="isShowSignUp = false">取 消</el-button>
@@ -114,7 +111,6 @@
           nickname:[{required: true, message: '昵称不能为空', trigger: 'blur'}],
           email:[{type: 'email', message:'请输入正确的格式', trigger: 'blur'}],
           phone:[],
-          address:[],
         },
         ruleForm: {
           username: '',
@@ -123,7 +119,6 @@
           nickname: '',
           email: '',
           phone: '',
-          address: ''
         },
           //忘记密码？
         fgPdDialogVisible: false,

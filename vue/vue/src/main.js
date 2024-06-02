@@ -20,7 +20,7 @@ new Vue({
   router,
   beforeCreate(){
     Vue.prototype.$bus = this
-    Vue.prototype.gotoUrl="http://1.92.133.98:8090"
+    Vue.prototype.gotoUrl="http://localhost:8090"
   },
   render: h => h(App)
 }).$mount('#app')

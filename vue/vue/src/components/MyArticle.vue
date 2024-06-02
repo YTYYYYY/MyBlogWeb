@@ -18,7 +18,10 @@
           :filterclick="1"
           label="操作"
           width="100">
-        <el-button type="danger" plain>删除</el-button>
+        <template slot-scope="scope">
+          <el-button type="danger" plain @click="checkDetail(scope.row)">删除</el-button>
+        </template>
+
       </el-table-column>
     </el-table>
 
@@ -41,19 +44,32 @@
         tableData: [],
         total: 10,
         pageNum: 1,
-        pageSize: 10
+        pageSize: 10,
+        currid: 0
       }
     },
     created(){
+      this.currid = JSON.parse(localStorage.getItem("accountUser")).id
       this.loadTable()
     },
     mounted(){
       this.loadTable()
     },
     methods:{
+      checkDetail(row){
+        this.request.delete(this.gotoUrl+"/file/"+row.id,{
+          params:{
+            currid: this.currid
+          }
+        }).then(res => {
+          if(res.code === '1') {
+            this.loadTable()
+          }else {
+            this.$message({message: '操作失败', type: 'error'})
+          }
+        })
+      },
       rowClick(row,event,colum){
-        console.log(event)
-        console.log(colum)
         if(event.label !== "操作"){
           this.showArticle(row.id,row.uuid)
         }
@@ -63,12 +79,11 @@
         this.pageNum=val
       },
       loadTable(){
-        let currid = JSON.parse(localStorage.getItem("accountUser")).id
         this.request.get(this.gotoUrl+"/file/currpage",{
           params:{
             pageNum: this.pageNum,
             pageSize: this.pageSize,
-            currid: currid
+            currid: this.currid
           }
         }).then(res => {
           if(res.code === '1') {

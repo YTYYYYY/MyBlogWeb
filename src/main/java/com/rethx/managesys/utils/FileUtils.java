@@ -19,7 +19,7 @@ public class FileUtils implements Constants {
             try {
                 f.createNewFile();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new ServiceException(CODE_800,e.toString());
             }
         }
         BufferedReader br = new BufferedReader(new StringReader(str));
@@ -35,8 +35,7 @@ public class FileUtils implements Constants {
             br.close();
             bw.close();
         } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+            throw new ServiceException(CODE_800,e.toString());
         }
         return true;
     }
